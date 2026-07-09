@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA Detector de Fraude - Aprendizaje por Refuerzo</title>
+    <!-- Tailwind CSS para el diseño-->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Chart.js para las gráficas de aprendizaje -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen font-sans">
+
+    <!-- Navbar / Encabezado -->
+    <header class="bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-500 border-b border-yellow-300 p-4 sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                IA de Mercado Libre <span class="text-xs bg-slate-900 text-yellow-300 px-2 py-0.5 rounded border border-slate-800">Q-Learning</span>
+            </h1>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- COLUMNA 1: Sección Educativa -->
+
+        <section class="lg:col-span-1 bg-white p-4 rounded-xl border border-blue-100 shadow-md text-slate-700 self-start">
+            <h2 class="text-lg font-semibold text-slate-800 border-b border-blue-100 pb-1">Fundamentos de RL</h2>
+            
+            <div class="space-y-3 text-sm text-slate-600 mt-4 mb-4">
+                <p><strong class="text-blue-600">Agente:</strong> El inspector del banco (nuestro código en Flask), que recibe cada caso y debe decidir si aprobarlo o bloquearlo.</p>
+                <p><strong class="text-blue-600">Entorno:</strong> El flujo de transacciones de la tienda, donde cada compra genera una nueva situación para evaluar.</p>
+                <p><strong class="text-blue-600">Estado:</strong> La combinación de las 5 variables actuales de la compra: monto, ubicación, dispositivo, hora y frecuencia.</p>
+                <p><strong class="text-blue-600">Acción:</strong> Aprobar o Bloquear. La decisión impacta directamente en la experiencia del cliente y en la seguridad del negocio.</p>
+                <p><strong class="text-blue-600">Recompensa:</strong> +1 o +2 por aciertos, y penalizaciones severas si deja pasar un fraude o bloquea una compra legítima.</p>
+                <p><strong class="text-blue-600">Aprendizaje:</strong> El modelo aprende con Q-Learning: actualiza una tabla de valores para cada estado y acción, mejorando su política con el tiempo.</p>
+                <p><strong class="text-blue-600">Exploración y explotación:</strong> a veces prueba decisiones nuevas para descubrir patrones, y otras veces reutiliza lo que ya ha aprendido para decidir con mayor seguridad.</p>
+            </div>
+            
+            <div class="bg-sky-50 p-2 rounded-lg border border-sky-100 text-xs text-slate-600">
+                <span class="text-amber-600 font-semibold block mb-1"> ¿Cómo aprende?</span>
+                Mediante la Ecuación de Bellman, el agente actualiza su "Tabla Q" cada vez que recibe un castigo o premio, modificando sus decisiones futuras.
+            </div>
+        </section>
+
+        <!-- COLUMNA 2 Y 3: Simulador y Gráficos -->
+        <section class="lg:col-span-2 space-y-6">
+            
+            <!-- PANEL DE CONTROL / SIMULADOR -->
+            <div class="bg-white p-5 rounded-xl border border-blue-100 shadow-xl text-slate-700">
+                <h2 class="text-lg font-semibold text-slate-800 mb-4 flex items-center gap-2">Simulador de Transacciones</h2>
+                
+                <!-- Formulario de Variables -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4 text-sm">
+                    <div>
+                        <label class="block text-xs text-slate-900 font-semibold mb-1">Monto ($)</label>
+                        <select id="monto" class="w-full bg-slate-50 border border-blue-200 rounded p-2 text-slate-900 font-medium focus:outline-none focus:border-blue-500">
+                            <option value="Bajo">Bajo (Menor a $10.000)</option>
+                            <option value="Medio">Medio ($10.000 a $100.000)</option>
+                            <option value="Alto">Alto (Mayor a $100.000)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-900 font-semibold mb-1">Ubicación</label>
+                        <select id="ubicacion" class="w-full bg-slate-50 border border-blue-200 rounded p-2 text-slate-900 font-medium focus:outline-none focus:border-blue-500">
+                            <option value="Local">Local (Ciudad natal)</option>
+                            <option value="Internacional_Habitual">Internacional Habitual</option>
+                            <option value="Internacional_Sospechosa">País de Alto Riesgo</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-900 font-semibold mb-1">Dispositivo</label>
+                        <select id="dispositivo" class="w-full bg-slate-50 border border-blue-200 rounded p-2 text-slate-900 font-medium focus:outline-none focus:border-blue-500">
+                            <option value="Frecuente">Celular de siempre</option>
+                            <option value="Nuevo">Dispositivo Nuevo</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-900 font-semibold mb-1">Hora</label>
+                        <select id="hora" class="w-full bg-slate-50 border border-blue-200 rounded p-2 text-slate-900 font-medium focus:outline-none focus:border-blue-500">
+                            <option value="Regular">De día (Horario Hábil)</option>
+                            <option value="Madrugada">Madrugada (3:00 AM)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-900 font-semibold mb-1">Frecuencia</label>
+                        <select id="frecuencia" class="w-full bg-slate-50 border border-blue-200 rounded p-2 text-slate-900 font-medium focus:outline-none focus:border-blue-500">
+                            <option value="Normal">1 compra hoy</option>
+                            <option value="Alta_Frecuencia">5 compras seguidas</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-900 font-semibold mb-1">Naturaleza Real</label>
+                        <select id="es_fraude" class="w-full bg-amber-50 border border-amber-300 rounded p-2 text-amber-700 focus:outline-none">
+                            <option value="false">Legítima (Cliente Real)</option>
+                            <option value="true">FRAUDE (Tarjeta Clonada)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button id="btn-evaluar" class="w-full bg-yellow-400 hover:bg-yellow-300 text-slate-900 font-semibold p-3 rounded-lg transition shadow-lg shadow-yellow-500/30 cursor-pointer">
+                    Enviar caso a evaluar por el Agente IA
+                </button>
+            </div>
+
+            <!-- RESPUESTA EN TIEMPO REAL Y GRÁFICA -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Tarjeta de logs / Estado actual -->
+                <div class="md:col-span-1 bg-white p-3 rounded-xl border border-blue-100 shadow-xl flex flex-col justify-start gap-1 text-slate-700 self-start">
+                    <div class="space-y-0.5">
+                        <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Decisión del Agente</h3>
+                        <div id="output-accion" class="text-2xl font-bold text-blue-600 leading-none">---</div>
+                        <p id="output-metodo" class="text-xs text-slate-500 italic">Esperando interacción...</p>
+                    </div>
+                    <div class="pt-2 border-t border-slate-200 space-y-0.5">
+                        <span class="text-xs text-slate-500 block">Recompensa obtenida:</span>
+                        <span id="output-recompensa" class="text-xl font-bold text-slate-800 leading-none">0</span>
+                    </div>
+                </div>
+
+                <!-- Gráfico de convergencia (Evolución de Recompensas) -->
+                <div class="md:col-span-2 bg-white p-5 rounded-xl border border-blue-100 shadow-xl">
+                    <h3 class="text-sm font-semibold text-slate-500 mb-2">Evolución del Aprendizaje (Recompensa Acumulada)</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+                        <div class="rounded-lg border border-slate-200 bg-slate-50 p-3">
+                            <p class="text-[11px] uppercase tracking-wide text-slate-500">Recompensa total</p>
+                            <p id="metric-recompensa-total" class="text-lg font-bold text-slate-900">0</p>
+                        </div>
+                        <div class="rounded-lg border border-slate-200 bg-slate-50 p-3">
+                            <p class="text-[11px] uppercase tracking-wide text-slate-500">Promedio por paso</p>
+                            <p id="metric-promedio" class="text-lg font-bold text-slate-900">0.00</p>
+                        </div>
+                        <div class="rounded-lg border border-slate-200 bg-slate-50 p-3">
+                            <p class="text-[11px] uppercase tracking-wide text-slate-500">Pasos evaluados</p>
+                            <p id="metric-pasos" class="text-lg font-bold text-slate-900">0</p>
+                        </div>
+                    </div>
+                    <div class="h-[28rem]">
+                        <canvas id="chart-aprendizaje"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Script de control de la app -->
+    <script src="js/app.js"></script>
+</body>
+</html>

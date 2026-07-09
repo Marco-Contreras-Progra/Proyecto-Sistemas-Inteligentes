@@ -1,0 +1,86 @@
+{
+  "Bajo_Local_Frecuente_Regular_Normal": {
+    "Aprobar": 0.2,
+    "Bloquear": 0.0
+  },
+  "Alto_Internacional_Habitual_Frecuente_Regular_Normal": {
+    "Aprobar": 0.0,
+    "Bloquear": 0.0
+  },
+  "Bajo_Internacional_Sospechosa_Nuevo_Madrugada_Alta_Frecuencia": {
+    "Aprobar": -1.84,
+    "Bloquear": 0.0
+  },
+  "Medio_Internacional_Habitual_Frecuente_Madrugada_Alta_Frecuencia": {
+    "Aprobar": -2.0,
+    "Bloquear": 0.0
+  },
+  "Alto_Local_Frecuente_Regular_Normal": {
+    "Aprobar": 0.0,
+    "Bloquear": 0.0
+  },
+  "Medio_Internacional_Sospechosa_Nuevo_Madrugada_Alta_Frecuencia": {
+    "Aprobar": -2.0,
+    "Bloquear": 0.0
+  },
+  "Alto_Internacional_Habitual_Nuevo_Madrugada_Alta_Frecuencia": {
+    "Aprobar": 0.0,
+    "Bloquear": 0.0
+  },
+  "Bajo_Local_Frecuente_Madrugada_Normal": {
+    "Aprobar": 0.36000000000000004,
+    "Bloquear": 0.0
+  },
+  "Alto_Internacional_Sospechosa_Nuevo_Madrugada_Normal": {
+    "Aprobar": 0.0,
+    "Bloquear": 0.0
+  },
+  "Alto_Internacional_Sospechosa_Frecuente_Madrugada_Alta_Frecuencia": {
+    "Aprobar": 0.0,
+    "Bloquear": 0.0
+  },
+  "Medio_Internacional_Habitual_Frecuente_Regular_Normal": {
+    "Aprobar": 0.2,
+    "Bloquear": 0.0
+  },
+  "Bajo_Internacional_Sospechosa_Nuevo_Regular_Normal": {
+    "Aprobar": 0.0,
+    "Bloquear": 0.0
+  },
+  "Alto_Local_Nuevo_Madrugada_Normal": {
+    "Aprobar": 0.0,
+    "Bloquear": 0.0
+  },
+  "Bajo_Local_Frecuente_Regular_Normal": {
+    "Aprobar": 12.5,
+    "Bloquear": -5.0
+  },
+  "Medio_Local_Frecuente_Regular_Normal": {
+    "Aprobar": 10.2,
+    "Bloquear": -4.1
+  },
+  "Alto_Local_Frecuente_Regular_Normal": {
+    "Aprobar": 8.5,
+    "Bloquear": -2.0
+  },
+  "Alto_Internacional_Sospechosa_Nuevo_Madrugada_Alta_Frecuencia": {
+    "Aprobar": -25.0,
+    "Bloquear": 18.5
+  },
+  "Bajo_Local_Nuevo_Madrugada_Alta_Frecuencia": {
+    "Aprobar": -12.4,
+    "Bloquear": 9.2
+  },
+  "Medio_Internacional_Habitual_Frecuente_Regular_Normal": {
+    "Aprobar": 6.8,
+    "Bloquear": -1.5
+  },
+  "Alto_Internacional_Habitual_Nuevo_Madrugada_Normal": {
+    "Aprobar": -3.2,
+    "Bloquear": 5.4
+  },
+  "Bajo_Internacional_Sospechosa_Frecuente_Regular_Alta_Frecuencia": {
+    "Aprobar": -8.1,
+    "Bloquear": 7.0
+  }
+}

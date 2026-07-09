@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import random
+import json
+import os
 
 app = Flask(__name__)
 CORS(app)  # Permite que tu frontend se comunique con el backend sin bloqueos de seguridad
@@ -14,6 +16,28 @@ epsilon = 0.15 # Tasa de exploración (Probabilidad de intentar algo nuevo)
 # Estructura: { "Estado_String": {"Aprobar": valor_Q, "Bloquear": valor_Q} }
 q_table = {}
 ACTIONS = ["Aprobar", "Bloquear"]
+Q_TABLE_FILE = os.path.join(os.path.dirname(__file__), 'q_table.json')
+
+
+def load_q_table():
+    """Carga la tabla Q desde un archivo JSON si existe."""
+    global q_table
+    if os.path.exists(Q_TABLE_FILE):
+        try:
+            with open(Q_TABLE_FILE, 'r', encoding='utf-8') as f:
+                q_table = json.load(f)
+        except (json.JSONDecodeError, OSError):
+            q_table = {}
+
+
+def save_q_table():
+    """Guarda la tabla Q en un archivo JSON."""
+    try:
+        with open(Q_TABLE_FILE, 'w', encoding='utf-8') as f:
+            json.dump(q_table, f, indent=2, ensure_ascii=False)
+    except OSError:
+        pass
+
 
 def get_or_create_q_values(state_str):
     """Si el estado es nuevo para el agente, lo inicializa en 0."""
@@ -70,6 +94,8 @@ def learn():
     # Q(s,a) = Q(s,a) + alpha * (reward + gamma * max(Q(s',a')) - Q(s,a))
     q_values[action] = q_values[action] + alpha * (reward + gamma * max_next_q - q_values[action])
     
+    save_q_table()
+    
     return jsonify({
         "status": "success",
         "updated_q_values": q_values
@@ -81,5 +107,6 @@ def get_all_q_table():
     return jsonify(q_table)
 
 if __name__ == '__main__':
+    load_q_table()
     # Correr el servidor en el puerto 5000
     app.run(port=5000, debug=True)

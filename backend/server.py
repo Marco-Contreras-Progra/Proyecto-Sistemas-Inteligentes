@@ -40,6 +40,18 @@ def save_q_table():
         pass
 
 
+def reset_q_table():
+    """Borra la tabla Q en memoria y elimina el archivo persistido."""
+    global q_table
+    q_table = {}
+    try:
+        if os.path.exists(Q_TABLE_FILE):
+            os.remove(Q_TABLE_FILE)
+    except OSError:
+        pass
+    return True
+
+
 def get_or_create_q_values(state_str):
     """Si el estado es nuevo para el agente, lo inicializa en 0."""
     if state_str not in q_table:
@@ -107,6 +119,15 @@ def get_all_q_table():
     """Devuelve todo lo que el agente ha aprendido para mostrarlo en una tabla en la web."""
     load_q_table()
     return jsonify(q_table)
+
+@app.route('/reset', methods=['DELETE'])
+def reset_endpoint():
+    """Reinicia la tabla Q desde cero y borra la copia persistida en disco."""
+    reset_q_table()
+    return jsonify({
+        "status": "success",
+        "message": "Tabla Q reiniciada"
+    })
 
 if __name__ == '__main__':
     load_q_table()

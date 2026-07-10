@@ -8,6 +8,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- Chart.js para las gráficas de aprendizaje -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- MathJax para renderizar fórmulas matemáticas -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body class="bg-slate-100 text-slate-800 min-h-screen font-sans">
 
@@ -20,37 +22,126 @@
         </div>
     </header>
 
-    <main class="container mx-auto p-4 grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
-        <!-- COLUMNA 1: Sección Educativa -->
+    <main class="container mx-auto p-4">
+        <div class="flex flex-wrap gap-2 border-b border-blue-200 mb-6">
+            <button type="button" class="tab-btn active px-4 py-2 rounded-t-lg bg-blue-500 text-white font-semibold shadow-sm" data-tab="teoria">Teoría</button>
+            <button type="button" class="tab-btn px-4 py-2 rounded-t-lg bg-gray-200 text-gray-700 font-semibold hover:bg-gray-300" data-tab="simulador">Simulador</button>
+            <button type="button" class="tab-btn px-4 py-2 rounded-t-lg bg-gray-200 text-gray-700 font-semibold hover:bg-gray-300" data-tab="estadisticas">Tabla Q y Estadísticas</button>
+        </div>
 
-        <section class="lg:col-span-1 bg-white p-4 rounded-xl border border-blue-100 shadow-md text-slate-700 self-start">
-            <h2 class="text-lg font-semibold text-slate-800 border-b border-blue-100 pb-1">Fundamentos de RL</h2>
-            
-            <div class="space-y-3 text-sm text-slate-600 mt-4 mb-4">
-                <p><strong class="text-blue-600">Agente:</strong> El inspector del banco (nuestro código en Flask), que recibe cada caso y debe decidir si aprobarlo o bloquearlo.</p>
-                <p><strong class="text-blue-600">Entorno:</strong> El flujo de transacciones de la tienda, donde cada compra genera una nueva situación para evaluar.</p>
-                <p><strong class="text-blue-600">Estado:</strong> La combinación de las 5 variables actuales de la compra: monto, ubicación, dispositivo, hora y frecuencia.</p>
-                <p><strong class="text-blue-600">Acción:</strong> Aprobar o Bloquear. La decisión impacta directamente en la experiencia del cliente y en la seguridad del negocio.</p>
-                <p><strong class="text-blue-600">Recompensa:</strong> +1 o +2 por aciertos, y penalizaciones severas si deja pasar un fraude o bloquea una compra legítima.</p>
-                <p><strong class="text-blue-600">Aprendizaje:</strong> El modelo aprende con Q-Learning: actualiza una tabla de valores para cada estado y acción, mejorando su política con el tiempo.</p>
-                <p><strong class="text-blue-600">Exploración y explotación:</strong> a veces prueba decisiones nuevas para descubrir patrones, y otras veces reutiliza lo que ya ha aprendido para decidir con mayor seguridad.</p>
-            </div>
-            
-            <div class="bg-sky-50 p-2 rounded-lg border border-sky-100 text-xs text-slate-600">
-                <span class="text-amber-600 font-semibold block mb-1"> ¿Cómo aprende?</span>
-                Mediante la Ecuación de Bellman, el agente actualiza su "Tabla Q" cada vez que recibe un castigo o premio, modificando sus decisiones futuras.
-            </div>
-        </section>
+        <div id="tab-teoria" class="tab-content space-y-6">
+            <section class="bg-white p-5 rounded-xl border border-blue-100 shadow-md text-slate-700">
+                <div class="flex flex-wrap items-start justify-between gap-3">
+                    <div>
+                        <p class="text-sm font-semibold uppercase tracking-wide text-blue-600">Sección educativa ampliada</p>
+                        <h2 class="text-xl font-semibold text-slate-800 mt-1">Comprender el agente de aprendizaje por refuerzo</h2>
+                    </div>
+                    <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">Desde el estado hasta la recompensa</span>
+                </div>
+                <p class="mt-3 text-sm text-slate-600">Este módulo explica cómo el agente interpreta una transacción, toma una decisión y ajusta su tabla de valores para mejorar con el tiempo. La idea central es que cada caso deja una señal útil para futuras evaluaciones.</p>
 
-        <!-- COLUMNA 2 Y 3: Simulador y Gráficos -->
-        <section class="lg:col-span-2 space-y-6">
-            
-            <!-- PANEL DE CONTROL / SIMULADOR -->
-            <div class="bg-white p-5 rounded-xl border border-blue-100 shadow-xl text-slate-700">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4">
+                    <div class="rounded-xl border border-sky-100 bg-sky-50 p-3">
+                        <h3 class="font-semibold text-slate-800">1. Observa</h3>
+                        <p class="text-sm text-slate-600 mt-1">Revisa las señales del caso: monto, ubicación, dispositivo, hora y frecuencia.</p>
+                    </div>
+                    <div class="rounded-xl border border-emerald-100 bg-emerald-50 p-3">
+                        <h3 class="font-semibold text-slate-800">2. Decide</h3>
+                        <p class="text-sm text-slate-600 mt-1">Escoge entre aprobar o bloquear según la política aprendida.</p>
+                    </div>
+                    <div class="rounded-xl border border-amber-100 bg-amber-50 p-3">
+                        <h3 class="font-semibold text-slate-800">3. Aprende</h3>
+                        <p class="text-sm text-slate-600 mt-1">Recibe una recompensa y ajusta la valoración de esa acción para el futuro.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white p-5 rounded-xl border border-blue-100 shadow-md text-slate-700">
+                <h3 class="text-lg font-semibold text-slate-800 border-b border-blue-100 pb-2">Fundamentos de RL</h3>
+                
+                <div class="space-y-3 mt-4 mb-4">
+                    <div class="rounded-xl border border-sky-100 bg-sky-50/80 overflow-hidden">
+                        <button type="button" class="w-full text-left p-3 flex items-center justify-between" data-card-toggle aria-expanded="true" data-target="card-agente">
+                            <span class="font-semibold text-slate-800">¿Qué hace el agente?</span>
+                            <span class="toggle-icon text-sky-600 text-lg">−</span>
+                        </button>
+                        <div id="card-agente" class="px-3 pb-3 text-sm text-slate-600">
+                            <p>El agente observa cada transacción como si fuera un inspector: recibe una compra, revisa sus señales y decide si <span class="font-semibold text-slate-800">aprobarla</span> o <span class="font-semibold text-slate-800">bloquearla</span>. Su objetivo no es adivinar al azar, sino aprender de cada resultado.</p>
+                        </div>
+                    </div>
+
+                    <div class="rounded-xl border border-slate-200 bg-white overflow-hidden">
+                        <button type="button" class="w-full text-left p-3 flex items-center justify-between" data-card-toggle aria-expanded="false" data-target="card-estado">
+                            <span class="font-semibold text-slate-800">¿Qué representa el estado?</span>
+                            <span class="toggle-icon text-sky-600 text-lg">+</span>
+                        </button>
+                        <div id="card-estado" class="hidden px-3 pb-3 text-sm text-slate-600">
+                            <p>El estado está formado por 5 señales de la compra: monto, ubicación, dispositivo, hora y frecuencia. Cada combinación se convierte en una situación distinta para el agente.</p>
+                        </div>
+                    </div>
+
+                            <div class="rounded-xl border border-slate-200 bg-white overflow-hidden">
+                        <button type="button" class="w-full text-left p-3 flex items-center justify-between" data-card-toggle aria-expanded="false" data-target="card-formula">
+                            <span class="font-semibold text-slate-800">¿Cómo aprende con la fórmula?</span>
+                            <span class="toggle-icon text-sky-600 text-lg">+</span>
+                        </button>
+                        <div id="card-formula" class="hidden px-3 pb-3 text-sm text-slate-600">
+                            <p>El sistema usa una versión sencilla de Q-Learning. Cada vez que el agente actúa, compara lo que esperaba con lo que realmente pasó y ajusta su memoria:</p>
+                            <p class="mt-2 rounded-lg bg-slate-50 p-2 border border-slate-200 text-slate-700"><strong>\(Q(s,a) \leftarrow Q(s,a) + \alpha\,[R + \gamma\,\max_{a'} Q(s',a') - Q(s,a)]\)</strong></p>
+                            <p class="mt-2">La idea es simple: si una decisión trae buen resultado, se refuerza; si trae problemas, se debilita para futuras ocasiones.</p>
+                        </div>
+                    </div>
+
+                    <div class="rounded-xl border border-slate-200 bg-white overflow-hidden">
+                        <button type="button" class="w-full text-left p-3 flex items-center justify-between" data-card-toggle aria-expanded="false" data-target="card-parametros">
+                            <span class="font-semibold text-slate-800">Parámetros usados y por qué</span>
+                            <span class="toggle-icon text-sky-600 text-lg">+</span>
+                        </button>
+                        <div id="card-parametros" class="hidden px-3 pb-3 text-sm text-slate-600 space-y-2">
+                            <div class="rounded-lg border border-amber-100 bg-amber-50 p-2">
+                                <p class="font-semibold text-amber-700">α = 0.2 · Tasa de aprendizaje</p>
+                                <p>Hace que el agente aprenda de forma gradual, sin corregir demasiado rápido.</p>
+                            </div>
+                            <div class="rounded-lg border border-emerald-100 bg-emerald-50 p-2">
+                                <p class="font-semibold text-emerald-700">γ = 0.0 · Factor de descuento</p>
+                                <p>Al ser un problema de Bandido Contextual (las transacciones son independientes entre sí), se configura en 0 para enfocarse 100% en la recompensa inmediata.</p>
+                            </div>
+                            <div class="rounded-lg border border-sky-100 bg-sky-50 p-2">
+                                <p class="font-semibold text-sky-700">ε = 0.15 · Exploración</p>
+                                <p>Permite probar decisiones nuevas en algunos casos, para descubrir mejores reglas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NUEVA SECCIÓN: Conclusiones y Referencias -->
+            <section class="bg-white p-5 rounded-xl border border-blue-100 shadow-md text-slate-700 mt-6">
+                <h3 class="text-lg font-semibold text-slate-800 border-b border-blue-100 pb-2">Conclusiones y Limitaciones</h3>
+                <div class="mt-4 text-sm text-slate-600 space-y-3">
+                    <p>El Aprendizaje por Refuerzo demuestra ser una herramienta poderosa para la <strong>detección de anomalías en transacciones</strong>. Al interactuar continuamente con el entorno, el agente logra adaptarse a patrones de fraude sin depender exclusivamente de reglas estáticas.</p>
+                    
+                    <h4 class="font-semibold text-slate-700 mt-4">Limitaciones del modelo propuesto:</h4>
+                    <ul class="list-disc pl-5 space-y-1 text-slate-600">
+                        <li><strong>Fase de exploración inicial:</strong> Al inicio (cuando la tabla Q está vacía), el agente cometerá errores costosos (falsos positivos o negativos) mientras explora.</li>
+                        <li><strong>Entorno Adversario:</strong> En el mundo real, los estafadores cambian sus tácticas constantemente. El modelo necesita actualización continua para no volverse obsoleto.</li>
+                        <li><strong>Bandido Contextual vs RL Completo:</strong> Dado que las transacciones son eventos independientes, este modelo se simplificó usando un factor de descuento (γ = 0), limitando la capacidad de predecir cadenas de eventos a largo plazo.</li>
+                    </ul>
+                </div>
+
+                <h3 class="text-lg font-semibold text-slate-800 border-b border-blue-100 pb-2 mt-6">Referencias Bibliográficas</h3>
+                <ul class="mt-4 text-sm text-slate-600 space-y-2 list-disc pl-5">
+                    <li>Sutton, R. S., &amp; Barto, A. G. (2018). <em>Reinforcement Learning: An Introduction</em>. MIT press.</li>
+                    <li>Documentación oficial de Flask: <a href="https://flask.palletsprojects.com/" class="text-blue-500 hover:underline" target="_blank">https://flask.palletsprojects.com/</a></li>
+                    <li>Conceptos de Q-Learning y Bandidos Contextuales adaptados para la detección de fraude en entornos web.</li>
+                </ul>
+            </section>
+        </div>
+
+        <div id="tab-simulador" class="tab-content hidden space-y-6">
+            <section class="bg-white p-5 rounded-xl border border-blue-100 shadow-xl text-slate-700">
                 <h2 class="text-lg font-semibold text-slate-800 mb-4 flex items-center gap-2">Simulador de Transacciones</h2>
                 
-                <!-- Formulario de Variables -->
                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4 text-sm">
                     <div>
                         <label class="block text-xs text-slate-900 font-semibold mb-1">Monto ($)</label>
@@ -98,14 +189,17 @@
                     </div>
                 </div>
 
-                <button id="btn-evaluar" class="w-full bg-yellow-400 hover:bg-yellow-300 text-slate-900 font-semibold p-3 rounded-lg transition shadow-lg shadow-yellow-500/30 cursor-pointer">
-                    Enviar caso a evaluar por el Agente IA
-                </button>
-            </div>
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <button id="btn-evaluar" class="w-full bg-yellow-400 hover:bg-yellow-300 text-slate-900 font-semibold p-3 rounded-lg transition shadow-lg shadow-yellow-500/30 cursor-pointer">
+                        Enviar caso a evaluar por el Agente IA
+                    </button>
+                    <button id="btn-entrenar" type="button" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white font-semibold p-3 rounded-lg transition shadow-lg shadow-emerald-500/25 cursor-pointer">
+                        Entrenar 20 pasos
+                    </button>
+                </div>
+            </section>
 
-            <!-- RESPUESTA EN TIEMPO REAL Y GRÁFICA -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Tarjeta de logs / Estado actual -->
                 <div class="md:col-span-1 bg-white p-3 rounded-xl border border-blue-100 shadow-xl flex flex-col justify-start gap-1 text-slate-700 self-start">
                     <div class="space-y-0.5">
                         <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Decisión del Agente</h3>
@@ -118,7 +212,6 @@
                     </div>
                 </div>
 
-                <!-- Gráfico de convergencia (Evolución de Recompensas) -->
                 <div class="md:col-span-2 bg-white p-5 rounded-xl border border-blue-100 shadow-xl">
                     <h3 class="text-sm font-semibold text-slate-500 mb-2">Evolución del Aprendizaje (Recompensa Acumulada)</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
@@ -140,8 +233,63 @@
                     </div>
                 </div>
             </div>
+        </div>
 
-        </section>
+        <div id="tab-estadisticas" class="tab-content hidden">
+            <section class="bg-white p-5 rounded-xl border border-blue-100 shadow-md text-slate-700">
+                <div class="flex flex-wrap items-start justify-between gap-3">
+                    <div>
+                        <h2 class="text-xl font-semibold text-slate-800">Tabla Q y Estadísticas</h2>
+                        <p class="mt-2 text-sm text-slate-600">Aquí se mostrará la memoria de aprendizajes del agente y los indicadores más relevantes a medida que se evalúen más casos.</p>
+                    </div>
+                    <button id="btn-reset" type="button" class="bg-amber-500 hover:bg-amber-400 text-white font-semibold px-4 py-2 rounded-lg shadow-sm transition">
+                        Reiniciar aprendizaje
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4">
+                    <div class="rounded-lg border border-slate-200 bg-slate-50 p-3">
+                        <p class="text-[11px] uppercase tracking-wide text-slate-500">Recompensa acumulada</p>
+                        <p id="stats-recompensa-acumulada" class="text-lg font-bold text-slate-900">0</p>
+                    </div>
+                    <div class="rounded-lg border border-slate-200 bg-slate-50 p-3">
+                        <p class="text-[11px] uppercase tracking-wide text-slate-500">Promedio por paso</p>
+                        <p id="stats-promedio-paso" class="text-lg font-bold text-slate-900">0.00</p>
+                    </div>
+                    <div class="rounded-lg border border-slate-200 bg-slate-50 p-3">
+                        <p class="text-[11px] uppercase tracking-wide text-slate-500">Estados explorados</p>
+                        <p id="stats-estados-explorados" class="text-lg font-bold text-slate-900">0</p>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto mt-6">
+                    <div class="mb-6">
+                        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
+                            <div class="bg-slate-50 p-3 rounded border"><span class="block text-xs text-slate-500">Decisiones</span><span id="metric-total" class="text-xl font-bold">0</span></div>
+                            <div class="bg-green-50 p-3 rounded border"><span class="block text-xs text-slate-500">Aciertos</span><span id="metric-aciertos" class="text-xl font-bold text-green-700">0</span></div>
+                            <div class="bg-red-50 p-3 rounded border"><span class="block text-xs text-slate-500">Falsos positivos</span><span id="metric-falsos-positivos" class="text-xl font-bold text-red-700">0</span></div>
+                            <div class="bg-orange-50 p-3 rounded border"><span class="block text-xs text-slate-500">Falsos negativos</span><span id="metric-falsos-negativos" class="text-xl font-bold text-orange-700">0</span></div>
+                            <div class="bg-blue-50 p-3 rounded border"><span class="block text-xs text-slate-500">Precisión</span><span id="metric-precision" class="text-xl font-bold text-blue-700">0%</span></div>
+                        </div>
+                        <div id="q-table-container" class="overflow-auto max-h-96 border rounded p-2">
+                    <table class="min-w-full border border-slate-200 rounded-lg overflow-hidden text-sm">
+                        <thead class="bg-slate-50 text-slate-700">
+                            <tr>
+                                <th class="px-3 py-2 text-left font-semibold">Estado</th>
+                                <th class="px-3 py-2 text-left font-semibold">Acción</th>
+                                <th class="px-3 py-2 text-left font-semibold">Valor Q</th>
+                            </tr>
+                        </thead>
+                        <tbody id="q-table-body">
+                            <tr class="border-t border-slate-200">
+                                <td colspan="3" class="px-3 py-2 text-slate-500">Cargando tabla Q…</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                        </div>
+            </section>
+        </div>
     </main>
 
     <!-- Script de control de la app -->

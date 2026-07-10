@@ -112,8 +112,6 @@ La interfaz está organizada en tres pestañas:
 └── README.md              # Este archivo
 ```
 
-## Configuración del agente
-
 ## Referencias
 
 - Sutton, R. S., & Barto, A. G. (2018). Reinforcement Learning: An Introduction. MIT Press.

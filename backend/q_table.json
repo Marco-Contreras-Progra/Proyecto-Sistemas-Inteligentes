@@ -1,7 +1,7 @@
 {
   "Bajo_Local_Frecuente_Regular_Normal": {
-    "Aprobar": 12.5,
-    "Bloquear": -5.0
+    "Aprobar": 1.0218260798033252,
+    "Bloquear": -3.776
   },
   "Alto_Internacional_Habitual_Frecuente_Regular_Normal": {
     "Aprobar": 0.0,
@@ -16,20 +16,20 @@
     "Bloquear": 0.0
   },
   "Alto_Local_Frecuente_Regular_Normal": {
-    "Aprobar": 8.5,
+    "Aprobar": 7.0,
     "Bloquear": -2.0
   },
   "Medio_Internacional_Sospechosa_Nuevo_Madrugada_Alta_Frecuencia": {
     "Aprobar": -2.0,
-    "Bloquear": 0.4
+    "Bloquear": 0.7200000000000001
   },
   "Alto_Internacional_Habitual_Nuevo_Madrugada_Alta_Frecuencia": {
     "Aprobar": 0.0,
     "Bloquear": 0.0
   },
   "Bajo_Local_Frecuente_Madrugada_Normal": {
-    "Aprobar": 0.36000000000000004,
-    "Bloquear": 0.0
+    "Aprobar": 0.488,
+    "Bloquear": -1.0
   },
   "Alto_Internacional_Sospechosa_Nuevo_Madrugada_Normal": {
     "Aprobar": 0.0,
@@ -52,12 +52,12 @@
     "Bloquear": 0.0
   },
   "Medio_Local_Frecuente_Regular_Normal": {
-    "Aprobar": 10.2,
-    "Bloquear": -4.1
+    "Aprobar": 4.044147199999999,
+    "Bloquear": -4.279999999999999
   },
   "Alto_Internacional_Sospechosa_Nuevo_Madrugada_Alta_Frecuencia": {
     "Aprobar": -25.0,
-    "Bloquear": 4.768240639999999
+    "Bloquear": 4.214592511999999
   },
   "Bajo_Local_Nuevo_Madrugada_Alta_Frecuencia": {
     "Aprobar": -12.4,
@@ -100,7 +100,7 @@
     "Bloquear": 0.4
   },
   "Alto_Local_Nuevo_Regular_Alta_Frecuencia": {
-    "Aprobar": 0.0,
+    "Aprobar": -2.0,
     "Bloquear": 0.0
   },
   "Medio_Internacional_Sospechosa_Nuevo_Regular_Normal": {
@@ -136,8 +136,8 @@
     "Bloquear": 0.0
   },
   "Bajo_Internacional_Sospechosa_Frecuente_Madrugada_Alta_Frecuencia": {
-    "Aprobar": 0.0,
-    "Bloquear": 0.0
+    "Aprobar": -2.0,
+    "Bloquear": 0.472
   },
   "Medio_Local_Frecuente_Madrugada_Normal": {
     "Aprobar": 0.0,
@@ -164,6 +164,78 @@
     "Bloquear": 0.0
   },
   "Medio_Internacional_Habitual_Nuevo_Regular_Normal": {
+    "Aprobar": 0.0,
+    "Bloquear": 0.0
+  },
+  "Alto_Internacional_Sospechosa_Frecuente_Madrugada_Normal": {
+    "Aprobar": 0.0,
+    "Bloquear": 0.0
+  },
+  "Bajo_Internacional_Sospechosa_Nuevo_Madrugada_Normal": {
+    "Aprobar": 0.0,
+    "Bloquear": 0.0
+  },
+  "Medio_Internacional_Habitual_Nuevo_Madrugada_Normal": {
+    "Aprobar": 0.0,
+    "Bloquear": 0.0
+  },
+  "Medio_Internacional_Sospechosa_Frecuente_Madrugada_Alta_Frecuencia": {
+    "Aprobar": 0.0,
+    "Bloquear": 0.0
+  },
+  "Bajo_Internacional_Habitual_Nuevo_Regular_Alta_Frecuencia": {
+    "Aprobar": 0.0,
+    "Bloquear": 0.0
+  },
+  "Bajo_Internacional_Sospechosa_Nuevo_Regular_Alta_Frecuencia": {
+    "Aprobar": 0.0,
+    "Bloquear": 0.0
+  },
+  "Alto_Internacional_Habitual_Nuevo_Regular_Alta_Frecuencia": {
+    "Aprobar": 0.0,
+    "Bloquear": 0.0
+  },
+  "Bajo_Internacional_Habitual_Frecuente_Regular_Alta_Frecuencia": {
+    "Aprobar": 0.0,
+    "Bloquear": 0.0
+  },
+  "Alto_Internacional_Habitual_Frecuente_Regular_Alta_Frecuencia": {
+    "Aprobar": 0.0,
+    "Bloquear": 0.0
+  },
+  "Bajo_Internacional_Habitual_Frecuente_Madrugada_Normal": {
+    "Aprobar": 0.0,
+    "Bloquear": 0.0
+  },
+  "Medio_Internacional_Habitual_Nuevo_Madrugada_Alta_Frecuencia": {
+    "Aprobar": 0.0,
+    "Bloquear": 0.0
+  },
+  "Medio_Local_Frecuente_Madrugada_Alta_Frecuencia": {
+    "Aprobar": 0.0,
+    "Bloquear": 0.0
+  },
+  "Alto_Internacional_Sospechosa_Nuevo_Regular_Normal": {
+    "Aprobar": 0.0,
+    "Bloquear": 0.0
+  },
+  "Alto_Local_Frecuente_Madrugada_Normal": {
+    "Aprobar": 0.0,
+    "Bloquear": 0.0
+  },
+  "Test_State_Example": {
+    "Aprobar": 0.4895915389760706,
+    "Bloquear": 0.0
+  },
+  "Bajo_Internacional_Sospechosa_Frecuente_Regular_Normal": {
+    "Aprobar": 0.0,
+    "Bloquear": 0.0
+  },
+  "Bajo_Internacional_Sospechosa_Frecuente_Madrugada_Normal": {
+    "Aprobar": 0.0,
+    "Bloquear": 0.0
+  },
+  "Alto_Local_Nuevo_Regular_Normal": {
     "Aprobar": 0.0,
     "Bloquear": 0.0
   }

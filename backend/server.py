@@ -9,7 +9,8 @@ CORS(app)  # Permite que tu frontend se comunique con el backend sin bloqueos de
 
 # --- PARÁMETROS DE APRENDIZAJE POR REFUERZO ---
 alpha = 0.2    # Tasa de aprendizaje (Learning Rate)
-gamma = 0.9    # Factor de descuento (Importancia de recompensas futuras)
+# Contextual bandit: transacciones independientes → no discounting
+gamma = 0.0    # Factor de descuento (se configura a 0 para problemas tipo Bandit Contextual)
 epsilon = 0.15 # Tasa de exploración (Probabilidad de intentar algo nuevo)
 
 # La Tabla Q se almacenará en memoria como un diccionario de diccionarios
@@ -104,6 +105,7 @@ def learn():
 @app.route('/q-table', methods=['GET'])
 def get_all_q_table():
     """Devuelve todo lo que el agente ha aprendido para mostrarlo en una tabla en la web."""
+    load_q_table()
     return jsonify(q_table)
 
 if __name__ == '__main__':

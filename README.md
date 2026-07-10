@@ -8,14 +8,6 @@ Aplicación web educativa que demuestra cómo un agente inteligente aprende a de
 - Navegador web moderno (Chrome, Firefox, Edge)
 - Conexión a Internet (para cargar librerías CDN – Tailwind, Chart.js, MathJax)
 
-## ✅ Verificación rápida
-
-He comprobado que el flujo descrito en este README funciona con la estructura actual del proyecto:
-
-- El backend responde correctamente en http://127.0.0.1:5000
-- El frontend se sirve correctamente en http://127.0.0.1:8000/index.html
-- La ruta del endpoint de aprendizaje responde correctamente en http://127.0.0.1:5000/q-table
-
 ## Instalación y ejecución paso a paso
 
 ### 1. Clona o descarga el repositorio
